@@ -28,6 +28,7 @@ const Map: FC = () => {
   return (
     <>
       {loading && <h5>Loading...</h5>}
+      {error && <h5>{error}</h5>}
       {flights.length > 0 && (
         <div className='map'>
           <GoogleMapReact

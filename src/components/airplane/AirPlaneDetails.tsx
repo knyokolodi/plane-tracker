@@ -60,7 +60,10 @@ const AirPlaneDetails: FC = () => {
 
   return (
     <div className='plane-details'>
-      {loading ? <h5>Loading Airplane Details</h5> : (
+      {error && <h5>{error}</h5>}
+      {loading ? (
+        <h5>Loading Airplane Details</h5>
+      ) : (
         <>
           <h3>Airplane Details</h3>
           <img src={jetPhoto} /> <br />
