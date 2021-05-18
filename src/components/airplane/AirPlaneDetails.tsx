@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 import { RouteComponentProps, useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 
 import { JetPhotos } from '../../api-interfaces'
+import { Button } from '../../styled/Button';
+import { PlaneDetails, PlaneDetailsImage } from '../../styled/PlaneDetails';
 
 interface IAirPlaneDetails extends RouteComponentProps<any> {
   flight: [];
@@ -60,22 +61,24 @@ const AirPlaneDetails: FC = () => {
   }, [flight]);
 
   return (
-    <div className='plane-details'>
-      {error && <h5>{error}</h5>}
+    <PlaneDetails>
+      {error && <h3>{error}</h3>}
       {loading ? (
-        <h5>Loading Airplane Details</h5>
+        <h3>Loading Airplane Details</h3>
       ) : (
         <>
           <h3>Airplane Details</h3>
-          <img src={jetPhoto} alt='Airplane details' /> <br />
+          {jetPhoto && (
+            <>
+              <PlaneDetailsImage src={jetPhoto} alt='Airplane details' /> <br />
+            </>
+          )}
           {JSON.stringify(flight)} <br />
           <br />
-          <Link className='btn' to='/'>
-            Go Back
-          </Link>
+          <Button to='/'>Go Back</Button>
         </>
       )}
-    </div>
+    </PlaneDetails>
   );
 };
 
