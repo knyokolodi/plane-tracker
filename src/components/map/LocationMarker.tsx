@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router';
-import { MapMarker } from '../../styled/MapContainer';
+import { Marker } from '../../styled/Marker';
 
 interface ILocationProps {
   lat: number;
@@ -23,7 +23,7 @@ const LocationMarker: FC<ILocationProps> = ({ flight }: ILocationProps) => {
 
   return (
     <div>
-      <MapMarker
+      <Marker
         src='airplane.png'
         alt='Location marker '
         onClick={() => airplaneDetails(flight)}

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MapContainer = styled.div`
+export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -8,10 +8,3 @@ export const MapContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-export const MapMarker = styled.img`
-  max-width: 20px;
-  max-height: 20px;
-  cursor: pointer;
-`;
-

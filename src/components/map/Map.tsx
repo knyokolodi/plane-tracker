@@ -3,7 +3,7 @@ import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
 
 import LocationMarker from './LocationMarker';
-import { MapContainer } from  '../../styled/MapContainer'
+import { Container } from  '../../styled/Container'
 
 const Map: FC = () => {
   const [flights, setFlights] = useState([]);
@@ -27,7 +27,7 @@ const Map: FC = () => {
   }, []);
 
   return (
-    <MapContainer>
+    <Container>
       {loading && <h3>Loading Map...</h3>}
       {error && <h3>{error}</h3>}
       {flights.length > 0 && (
@@ -44,7 +44,7 @@ const Map: FC = () => {
             })}
         </GoogleMapReact>
       )}
-    </MapContainer>
+    </Container>
   );
 };
 

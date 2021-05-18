@@ -5,6 +5,7 @@ import { RouteComponentProps, useHistory } from 'react-router';
 import { JetPhotos } from '../../api-interfaces'
 import { Button } from '../../styled/Button';
 import { PlaneDetails, PlaneDetailsImage } from '../../styled/PlaneDetails';
+import { Container } from '../../styled/Container';
 
 interface IAirPlaneDetails extends RouteComponentProps<any> {
   flight: [];
@@ -61,24 +62,26 @@ const AirPlaneDetails: FC = () => {
   }, [flight]);
 
   return (
-    <PlaneDetails>
-      {error && <h3>{error}</h3>}
-      {loading ? (
-        <h3>Loading Airplane Details</h3>
-      ) : (
-        <>
-          <h3>Airplane Details</h3>
-          {jetPhoto && (
-            <>
-              <PlaneDetailsImage src={jetPhoto} alt='Airplane details' /> <br />
-            </>
-          )}
-          {JSON.stringify(flight)} <br />
-          <br />
-          <Button to='/'>Go Back</Button>
-        </>
-      )}
-    </PlaneDetails>
+    <Container>
+      <PlaneDetails>
+        {error && <h3>{error}</h3>}
+        {loading ? (
+          <h3>Loading Airplane Details</h3>
+        ) : (
+          <>
+            <h3>Airplane Details</h3>
+            {jetPhoto && (
+              <>
+                <PlaneDetailsImage src={jetPhoto} alt='Airplane details' /> <br />
+              </>
+            )}
+            {JSON.stringify(flight)} <br />
+            <br />
+            <Button to='/'>Go Back</Button>
+          </>
+        )}
+      </PlaneDetails>
+    </Container>
   );
 };
 
