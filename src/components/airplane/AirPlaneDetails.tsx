@@ -67,7 +67,7 @@ const AirPlaneDetails: FC = () => {
       ) : (
         <>
           <h3>Airplane Details</h3>
-          <img src={jetPhoto} /> <br />
+          <img src={jetPhoto} alt='Airplane details image' /> <br />
           {JSON.stringify(flight)} <br />
           <br />
           <Link className='btn' to='/'>
