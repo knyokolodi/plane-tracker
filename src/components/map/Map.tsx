@@ -10,20 +10,20 @@ const Map: FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const getFlights = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/allFlights`);
+        setFlights(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(`error ${JSON.stringify(error)}`);
+        setError('Oops! an error occured getting flights');
+        setLoading(false);
+      }
+    };
+
     getFlights();
   }, []);
-
-  const getFlights = async () => {
-    try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/allFlights`);
-      setFlights(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(`error ${JSON.stringify(error)}`);
-      setError('Oops! an error occured getting flights')
-      setLoading(false);
-    }
-  };
 
   return (
     <>
