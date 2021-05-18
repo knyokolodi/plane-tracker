@@ -22,41 +22,44 @@ const AirPlaneDetails: FC = () => {
   } = history;
 
   useEffect(() => {
+    
+    const getAirPlanePhotos = async () => {
+        try {
+          const { data: jetPhotos } = await axios.get<JetPhotos[]>(`${process.env.REACT_APP_API_URL}/jetPhotos`);
+          //@ts-ignore
+          const airPlanePhoto = jetPhotos.filter((plane: JetPhotos) => plane.airplane_icao === flight[0]);
+          if(airPlanePhoto.length <= 0) {
+            //@ts-ignore
+            const { data: airplaneImages } = await axios.get(`${process.env.REACT_APP_API_URL}/airplaneImages/${flight[0]}`);
+
+            if(airplaneImages.length > 0) {
+              const data = {
+                username: 'Kagiso Nyokolodi',
+                //@ts-ignore
+                airplane_icao: flight[0],
+                airplane_image: airplaneImages[0][0],
+              };
+
+              await axios.post(`${process.env.REACT_APP_API_URL}/jetPhotos`, data);
+            }
+
+            setJetPhoto(airplaneImages[0][0]);
+          } else {
+            setJetPhoto(airPlanePhoto[0].airplane_image);
+          }
+          setLoading(false);
+
+        } catch (err) {
+          console.log(`Error ${JSON.stringify(err)}`);
+          setError('Oop! an error has occured.')
+          setLoading(false);
+        }
+      };
+
     getAirPlanePhotos();
   }, []);
 
-  const getAirPlanePhotos = async () => {
-    try {
-      const { data: jetPhotos } = await axios.get<JetPhotos[]>(`${process.env.REACT_APP_API_URL}/jetPhotos`);
-      //@ts-ignore
-      const airPlanePhoto = jetPhotos.filter((plane: JetPhotos) => plane.airplane_icao === flight[0]);
-      if(airPlanePhoto.length <= 0) {
-        //@ts-ignore
-        const { data: airplaneImages } = await axios.get(`${process.env.REACT_APP_API_URL}/airplaneImages/${flight[0]}`);
-
-        if(airplaneImages.length > 0) {
-          const data = {
-            username: 'Kagiso Nyokolodi',
-            //@ts-ignore
-            airplane_icao: flight[0],
-            airplane_image: airplaneImages[0][0],
-          };
-
-          await axios.post(`${process.env.REACT_APP_API_URL}/jetPhotos`, data);
-        }
-
-        setJetPhoto(airplaneImages[0][0]);
-      } else {
-        setJetPhoto(airPlanePhoto[0].airplane_image);
-      }
-      setLoading(false);
-
-    } catch (err) {
-      console.log(`Error ${JSON.stringify(err)}`);
-      setError('Oop! an error has occured.')
-      setLoading(false);
-    }
-  };
+  
 
   return (
     <div className='plane-details'>
