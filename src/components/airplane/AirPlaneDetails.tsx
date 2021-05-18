@@ -22,7 +22,7 @@ const AirPlaneDetails: FC = () => {
   } = history;
 
   useEffect(() => {
-    
+
     const getAirPlanePhotos = async () => {
         try {
           const { data: jetPhotos } = await axios.get<JetPhotos[]>(`${process.env.REACT_APP_API_URL}/jetPhotos`);
@@ -57,9 +57,7 @@ const AirPlaneDetails: FC = () => {
       };
 
     getAirPlanePhotos();
-  }, []);
-
-  
+  }, [flight]);
 
   return (
     <div className='plane-details'>
